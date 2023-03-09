@@ -2,8 +2,6 @@
 using Newtonsoft.Json;
 using System.Net;
 
-Console.BackgroundColor = ConsoleColor.Gray;
-Console.ForegroundColor = ConsoleColor.Red;
 do
 {
     using (var client = new HttpClient(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate }))
@@ -20,18 +18,22 @@ do
         var weather = JsonConvert.DeserializeObject<WeatherCorrd>(result);
         if (response.StatusCode == HttpStatusCode.NotFound)
         {
+
+            Console.BackgroundColor = ConsoleColor.Red;
             Console.WriteLine("" +
                 "\n  -The city not found" +
-                "\n  -Error: 404 .." +
-                "\n\n " +
-                "");
+                "\n  -Error: 404 .."
+                );
+            Console.ResetColor();
         }
         else
         {
             var todaysWeather = $"" +
                 $"\n  Temprature in {weather.Name} is: {(int)weather.Main.Temp}° now {DateTime.Now.ToShortTimeString()} " +
                 $"\n  It is {weather.Weather.FirstOrDefault().Main.ToLower()}";
+            Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.WriteLine(todaysWeather);
+            Console.ResetColor();
         }
     }
 } while (true);
