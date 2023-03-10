@@ -1,4 +1,4 @@
-﻿using ConsoleApp1;
+﻿using WeatherConsole;
 using Newtonsoft.Json;
 using System.Net;
 
@@ -15,7 +15,7 @@ do
         client.BaseAddress = new Uri(url);
         HttpResponseMessage response = client.GetAsync(url).Result;
         string result = response.Content.ReadAsStringAsync().Result;
-        var weather = JsonConvert.DeserializeObject<WeatherCorrd>(result);
+        var weatherDetails = JsonConvert.DeserializeObject<WeatherDetails>(result);
         if (response.StatusCode == HttpStatusCode.NotFound)
         {
 
@@ -29,8 +29,8 @@ do
         else
         {
             var todaysWeather = $"" +
-                $"\n  Temprature in {weather.Name} is: {(int)weather.Main.Temp}° now {DateTime.Now.ToShortTimeString()} " +
-                $"\n  It is {weather.Weather.FirstOrDefault().Main.ToLower()}";
+                $"\n  Temprature in {weatherDetails.Name} is: {(int)weatherDetails.Main.Temp}° now {DateTime.Now.ToShortTimeString()} " +
+                $"\n  It is {weatherDetails.Weather.FirstOrDefault().Main.ToLower()}";
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.WriteLine(todaysWeather);
             Console.ResetColor();

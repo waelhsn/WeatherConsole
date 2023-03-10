@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace ConsoleApp1
+namespace WeatherConsole
 {
-    public class WeatherCorrd
+    public class WeatherDetails
     {
         [JsonProperty("coord")]
         public Coord? Coord { get; set; }
