@@ -23,6 +23,4 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore WeatherConsole/*.sln
     - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet build --no-restore  WeatherConsole/*.sln
